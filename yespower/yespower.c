@@ -64,7 +64,7 @@ void yespower_hash( const char *input, char *output, uint32_t len )
 
 }
 
-/*int scanhash_yespower( int thr_id, struct work *work, uint32_t max_nonce,
+int scanhash_yespower( int thr_id, struct work *work, uint32_t max_nonce,
                        uint64_t *hashes_done )
 {
         uint32_t _ALIGN(64) vhash[8];
@@ -97,7 +97,7 @@ void yespower_hash( const char *input, char *output, uint32_t len )
         return 0;
 }
 
-bool register_yespower_algo( algo_gate_t* gate )
+/*bool register_yespower_algo( algo_gate_t* gate )
 {
   gate->optimizations = SSE2_OPT | SHA_OPT;
   gate->scanhash   = (void*)&scanhash_yespower;
