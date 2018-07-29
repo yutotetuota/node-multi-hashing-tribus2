@@ -35,7 +35,7 @@ extern "C" {
 using namespace node;
 using namespace v8;
 
-void yespower_hash( const char *input, char *output, uint32_t len );
+void yespower_hash( const char *input, char *output);
 
 void except(const char* msg) {
 	Isolate* isolate = Isolate::GetCurrent();
