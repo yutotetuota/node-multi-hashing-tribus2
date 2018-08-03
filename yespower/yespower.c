@@ -26,10 +26,7 @@
  * This file was originally written by Cryply team as part of the Cryply
  * coin.
  */
-#include "sha256.c"
-#include "sha256.h"
 #include "yespower.h"
-#include "yespower-opt.c"
 
 static const yespower_params_t yespower_bitzeny = {YESPOWER_0_5, 2048, 8, "Client Key", 10};
 
