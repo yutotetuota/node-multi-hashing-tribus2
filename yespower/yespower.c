@@ -26,19 +26,16 @@
  * This file was originally written by Cryply team as part of the Cryply
  * coin.
  */
-#include "yespower.h"
-#include "sysendian.h"
+#include "yespower/sha256.c"
+#include "yespower/sha256.h"
+#include "yespower/yespower.h"
+#include "yespower/yespower-opt.c"
 
-static const yespower_params_t v1 = {YESPOWER_0_5, 4096, 16, "Client Key", 10};
+static const yespower_params_t yespower_bitzeny = {YESPOWER_0_5, 2048, 8, "Client Key", 10};
 
-static const yespower_params_t v2 = {YESPOWER_0_9, 2048, 32, NULL, 0};
-
-int yespower_hash(const char *input, char *output)
-{
-    uint32_t time = le32dec(&input[68]);
-    if (time > 1530403200) {
-        return yespower_tls(input, 80, &v2, (yespower_binary_t *) output);
-    } else {
-        return yespower_tls(input, 80, &v1, (yespower_binary_t *) output);
+void yespower_hash(const char *input, char *output){
+    if (yespower_tls(input, 80, &yespower_bitzeny, (yespower_binary_t *) output) == 0){
+        return;
     }
+    abort();
 }
