@@ -13,7 +13,7 @@ extern "C" {
     #include "yescrypt/yescrypt.h"
     #include "yescrypt/sha256.h"
     #include "yespower/yespower.h"
-    #include "yespower/sha256.h"
+    #include "yespower/sha256_YP.h"
     #include "skein.h"
     #include "x11.h"
     #include "groestl.h"
