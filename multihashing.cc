@@ -27,7 +27,8 @@ extern "C" {
     #include "nist5.h"
     #include "sha1.h"
     #include "x15.h"
-	#include "fresh.h"
+    #include "fresh.h"
+    #include "tribus.h"
 }
 
 #include "boolberry.h"
@@ -647,6 +648,27 @@ void fresh(const FunctionCallbackInfo<Value>& args) {
     args.GetReturnValue().Set(buff);
 }
 
+void tribus(const FunctionCallbackInfo<Value>& args) {
+    Isolate* isolate = Isolate::GetCurrent();HandleScope scope(isolate);
+
+    if (args.Length() < 1)
+        return THROW_ERROR_EXCEPTION("You must provide one argument.");
+
+    Local<Object> target = args[0]->ToObject();
+
+    if(!Buffer::HasInstance(target))
+        return THROW_ERROR_EXCEPTION("Argument should be a buffer object.");
+
+    char * input = Buffer::Data(target);
+    char output[32];
+
+    tribus_hash(input, output);
+
+    Local<Object> buff = Nan::NewBuffer(output, 32).ToLocalChecked();
+    args.GetReturnValue().Set(buff);
+    );
+}
+
 void init(Handle<Object> exports) {
     NODE_SET_METHOD(exports, "quark", quark);
     NODE_SET_METHOD(exports, "x11", x11);
@@ -673,6 +695,7 @@ void init(Handle<Object> exports) {
     NODE_SET_METHOD(exports, "sha1", sha1);
     NODE_SET_METHOD(exports, "x15", x15);
     NODE_SET_METHOD(exports, "fresh", fresh);
+    NODE_SET_METHOD(exports, "tribus", tribus);
 }
 
 NODE_MODULE(multihashing, init)
