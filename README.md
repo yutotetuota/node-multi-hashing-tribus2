@@ -28,6 +28,7 @@ Algorithms
 * shavite3
 * cryptonight
 * boolberry
+* tribus
 
 Usage
 -----
